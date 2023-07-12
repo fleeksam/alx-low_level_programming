@@ -1,12 +1,14 @@
 #include "main.h"
+#include <stdio.h>
+
 /**
-* print_binary - Entry Point
-* @n: dec input
-* Return: 0
-*/
+ * print_binary - print binary representation of a number
+ * @n: decimal number to print as binary
+ */
 void print_binary(unsigned long int n)
 {
-	int i = 0, count, k, temp;
+	unsigned long int temp;
+	int shifts;
 
 	if (n == 0)
 	{
@@ -14,18 +16,12 @@ void print_binary(unsigned long int n)
 		return;
 	}
 
-	temp = n;
+	for (temp = n, shifts = 0; (temp >>= 1) > 0; shifts++)
+		;
 
-	while (temp != 0)
+	for (; shifts >= 0; shifts--)
 	{
-		i++;
-		temp = temp >> 1;
-	}
-
-	for (count = i - 1; count >= 0; count--)
-	{
-		k = n >> count;
-		if (k & 1)
+		if ((n >> shifts) & 1)
 			printf("1");
 		else
 			printf("0");
